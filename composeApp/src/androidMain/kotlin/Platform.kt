@@ -10,11 +10,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.Loading
 
 @Composable
 actual fun WebView(modifier: Modifier, link: String) {
     var isLoading by remember { mutableStateOf(true) }
     Box {
+        if(isLoading) {
+            Loading()
+        }
         AndroidView(
             factory = {
                 WebView(it).apply {

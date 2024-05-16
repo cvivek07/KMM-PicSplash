@@ -5,7 +5,7 @@ import ComposeApp
 @main
 struct iOSApp: App {
    init() {
-       KoinKt.doInitKoin()
+       KoinCommonKt.doInitKoin()
     }
 	var body: some Scene {
 		WindowGroup {
