@@ -1,6 +1,5 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.plugin.sources.dependsOnClosure
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -18,7 +17,8 @@ kotlin {
             }
         }
     }
-    
+    jvm("desktop")
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -64,6 +64,8 @@ kotlin {
             implementation(libs.image.loader)
             implementation(libs.sqlDelight.extensions)
             implementation(libs.kermit)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.compose.ktor)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
         }
@@ -73,19 +75,21 @@ kotlin {
             implementation(libs.sqlDelight.driver.native)
         }
     }
+    task("testClasses")
+
 }
 
 sqldelight {
     databases {
         create(name = "AppDatabase") {
-            packageName.set("momin.tahir.kmp.newsapp.data.sqldelight")
+            packageName.set("com.vivekchoudhary.kmp.picsplash.data.sqldelight")
             sourceFolders.set(listOf("kotlin"))
         }
     }
 }
 
 android {
-    namespace = "kmp.news.app"
+    namespace = "kmp.picsplash.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -93,7 +97,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "kmp.news.app"
+        applicationId = "kmp.picsplash.app"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -120,4 +124,3 @@ android {
 dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
 }
-

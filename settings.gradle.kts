@@ -1,4 +1,4 @@
-rootProject.name = "KMP-News-App"
+rootProject.name = "KMM-PicSplash"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
