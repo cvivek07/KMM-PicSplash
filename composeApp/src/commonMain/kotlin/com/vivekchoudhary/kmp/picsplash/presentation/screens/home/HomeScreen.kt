@@ -1,6 +1,5 @@
 package com.vivekchoudhary.kmp.picsplash.presentation.screens.home
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +38,6 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
-import coil3.compose.SubcomposeAsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
@@ -102,13 +100,13 @@ fun PhotosList(
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.animateContentSize().padding(8.dp)
+                modifier = Modifier.padding(8.dp)
                     .clickable {
                         onItemClick(photo)
                     }
             ) {
 
-                SubcomposeAsyncImage(
+                AsyncImage(
                     model = ImageRequest.Builder(LocalPlatformContext.current)
                         .data(photo.urls.regularSizeUrl)
                         .crossfade(true)
@@ -136,7 +134,9 @@ fun PhotosList(
                         maxLines = 2,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f, fill = false)
+                        modifier = Modifier.weight(1f, fill = false).clickable {
+                            onProfileImageClick(photo.user.links.profileLink)
+                        }
                     )
                     Spacer(modifier = Modifier.weight(1f, fill = true))
                     Icon(

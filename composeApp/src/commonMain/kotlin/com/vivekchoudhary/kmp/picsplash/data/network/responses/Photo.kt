@@ -1,8 +1,10 @@
 package com.vivekchoudhary.kmp.picsplash.data.network.responses
 
+import androidx.compose.runtime.Stable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Stable
 @Serializable
 data class Photo(
     @SerialName("id")
@@ -23,6 +25,7 @@ data class Photo(
     val user: User
 )
 
+@Stable
 @Serializable
 data class Urls(
     @SerialName("regular")
@@ -31,6 +34,7 @@ data class Urls(
     val fullSizeUrl: String
 )
 
+@Stable
 @Serializable
 data class User(
     @SerialName("profile_image")
@@ -41,6 +45,7 @@ data class User(
     val links: Links
 )
 
+@Stable
 @Serializable
 data class ProfileImage(
     @SerialName("medium")
@@ -49,6 +54,7 @@ data class ProfileImage(
     val largeProfileImage: String
 )
 
+@Stable
 @Serializable
 data class Links(
     @SerialName("html")

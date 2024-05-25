@@ -11,12 +11,15 @@ import com.vivekchoudhary.kmp.picsplash.data.network.ApiDefinition.ApiEndpoint.G
 import com.vivekchoudhary.kmp.picsplash.data.network.ApiDefinition.ApiEndpoint.GetCollections
 import com.vivekchoudhary.kmp.picsplash.data.network.ApiDefinition.ApiEndpoint.GetSavedPhotos
 import com.vivekchoudhary.kmp.picsplash.data.network.ApiDefinition.ApiEndpoint.GetUserProfile
+import com.vivekchoudhary.kmp.picsplash.data.network.ApiDefinition.ApiField.PARAM_PAGE
 import com.vivekchoudhary.kmp.picsplash.data.network.ApiDefinition.ApiField.PARAM_QUERY
 
 class ApiServiceImpl(private val httpClient: HttpClient) : ApiService {
 
-    override suspend fun getPhotos(): HttpResponse {
-        return httpClient.get(GetPhotos.path)
+    override suspend fun getPhotos(page: String): HttpResponse {
+        return httpClient.get(GetPhotos.path) {
+            parameter(PARAM_PAGE, page)
+        }
     }
 
     override suspend fun searchPhotos(query: String): HttpResponse {

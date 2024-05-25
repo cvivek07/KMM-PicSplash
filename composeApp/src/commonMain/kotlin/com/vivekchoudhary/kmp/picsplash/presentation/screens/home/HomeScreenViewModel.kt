@@ -26,7 +26,7 @@ class HomeScreenViewModel(
 
     private fun getPhotos() {
         viewModelScope.launch {
-            allPhotosUseCase().onSuccess {
+            allPhotosUseCase.invoke(false).onSuccess {
                 newsViewState.value = HomeScreenViewState.Success(photos = it)
             }.onFailure {
                 newsViewState.value = HomeScreenViewState.Failure(it.message.toString())

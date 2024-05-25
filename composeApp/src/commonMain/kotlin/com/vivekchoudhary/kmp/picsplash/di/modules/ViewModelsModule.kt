@@ -1,4 +1,4 @@
-package di.modules
+package com.vivekchoudhary.kmp.picsplash.di.modules
 
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.detail.DetailScreenViewModel
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.HomeScreenViewModel

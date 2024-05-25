@@ -1,11 +1,11 @@
 package com.vivekchoudhary.kmp.picsplash.di
 
 import com.vivekchoudhary.kmp.picsplash.di.modules.networkModule
+import com.vivekchoudhary.kmp.picsplash.di.modules.platformModule
 import com.vivekchoudhary.kmp.picsplash.di.modules.useCasesModule
-import di.modules.dataBaseDriverFactory
-import di.modules.repositoryModule
-import di.modules.sqlDelightModule
-import di.modules.viewModelModule
+import com.vivekchoudhary.kmp.picsplash.di.modules.repositoryModule
+import di.modules.dispatcherModule
+import com.vivekchoudhary.kmp.picsplash.di.modules.viewModelModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
@@ -15,11 +15,11 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
         appDeclaration()
         modules(
             viewModelModule,
+            dispatcherModule,
             useCasesModule,
             repositoryModule,
-            sqlDelightModule,
             networkModule,
-            dataBaseDriverFactory
+            platformModule
         )
     }
 

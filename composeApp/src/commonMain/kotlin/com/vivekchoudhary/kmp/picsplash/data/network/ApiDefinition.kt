@@ -15,5 +15,6 @@ sealed class ApiDefinition {
 
     object ApiField {
         const val PARAM_QUERY = "query"
+        const val PARAM_PAGE = "page"
     }
 }

@@ -7,7 +7,7 @@ import com.vivekchoudhary.kmp.picsplash.data.network.responses.SearchPhotosRespo
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Topic
 
 interface PhotosRepository {
-    suspend fun getPhotos(): List<Photo>
+    suspend fun getPhotos(refresh: Boolean): List<Photo>
     suspend fun searchPhotos(query: String) : SearchPhotosResponse
     suspend fun getTopics() : List<Topic>
     suspend fun getTopic(id: String) : List<Photo>

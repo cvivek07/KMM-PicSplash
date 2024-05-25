@@ -22,6 +22,7 @@ class WebViewScreen(private val url: String) : Screen {
     override fun Content() {
         val navigator: Navigator = LocalNavigator.currentOrThrow
         Column(modifier = Modifier.fillMaxSize()) {
+
             Icon(
                 imageVector = Icons.Rounded.ArrowBack,
                 tint = Color.DarkGray,
