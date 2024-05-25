@@ -42,7 +42,7 @@ the libraries are in the stable version unless there is a good reason to use non
           lifecycle state changes
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related
           data in a lifecycle-aware way
-        * [Sqldelight](https://github.com/cashapp/sqldelight) - store offline cache
+        * [Room Database](https://developer.android.com/kotlin/multiplatform/room) - store offline cache
     * [Koin](https://insert-koin.io/) - dependency injection (dependency retrieval)
 * Modern Architecture
     * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
