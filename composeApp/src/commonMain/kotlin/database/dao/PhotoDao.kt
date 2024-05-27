@@ -1,9 +1,10 @@
-package database
+package database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
+import database.entity.PhotoEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

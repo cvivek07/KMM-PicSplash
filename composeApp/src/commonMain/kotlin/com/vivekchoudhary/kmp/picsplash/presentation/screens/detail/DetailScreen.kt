@@ -19,65 +19,55 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import androidx.navigation.NavController
 import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.Loading
+import org.koin.compose.koinInject
 
-class DetailScreen(private val photo: Photo) : Screen {
-    @Composable
-    override fun Content() {
-        val viewModel = getScreenModel<DetailScreenViewModel>()
-        MainContent(viewModel)
-    }
-
-    @Composable
-    fun MainContent(
-        viewModel: DetailScreenViewModel,
-        navigator: Navigator = LocalNavigator.currentOrThrow
+@Composable
+fun DetailScreen(
+    viewModel: DetailScreenViewModel = koinInject(),
+    photo: Photo,
+    navController: NavController
+) {
+    Column(
+        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.Start
     ) {
-        Column(
-            modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.ArrowBack,
-                tint = Color.DarkGray,
-                contentDescription = null,
-                modifier = Modifier.clickable {
-                    navigator.pop()
-                }.padding(20.dp)
-            )
+        Icon(
+            imageVector = Icons.Rounded.ArrowBack,
+            tint = Color.DarkGray,
+            contentDescription = null,
+            modifier = Modifier.clickable {
+                navController.popBackStack()
+            }.padding(20.dp)
+        )
 
-            SubcomposeAsyncImage(
-                model = ImageRequest.Builder(LocalPlatformContext.current)
-                    .data(photo.urls.fullSizeUrl)
-                    .crossfade(true)
-                    .build(),
-                loading = {
-                    Loading()
-                },
-                contentDescription = null,
-                modifier = Modifier.wrapContentHeight()
-                    .wrapContentWidth()
-                    .padding(vertical = 8.dp)
-                    .clip(RoundedCornerShape(24.dp))
-            )
-            Text(
-                text = photo.altDescription?: "",
-                maxLines = 2,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+               .data(photo.urls.fullSizeUrl)
+                .crossfade(true)
+                .build(),
+            loading = {
+                Loading()
+            },
+            contentDescription = null,
+            modifier = Modifier.wrapContentHeight()
+                .wrapContentWidth()
+                .padding(vertical = 8.dp)
+                .clip(RoundedCornerShape(24.dp))
+        )
+//        Text(
+//            text = photo.altDescription ?: "",
+//            maxLines = 2,
+//            fontSize = 16.sp,
+//            fontWeight = FontWeight.Bold
+//        )
     }
+
 }

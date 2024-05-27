@@ -31,58 +31,49 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
-import com.vivekchoudhary.kmp.picsplash.presentation.screens.detail.DetailScreen
+import com.vivekchoudhary.kmp.picsplash.presentation.screens.Screen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos.maxHeight
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.web_view.WebViewScreen
+import org.koin.compose.koinInject
 
-class HomeScreen : Screen {
-    @Composable
-    override fun Content() {
-        val viewModel = getScreenModel<HomeScreenViewModel>()
-        MainContent(viewModel)
-    }
-
-    @Composable
-    fun MainContent(
-        viewModel: HomeScreenViewModel,
-        navigator: Navigator = LocalNavigator.currentOrThrow
+@Composable
+fun HomeScreen(
+    viewModel: HomeScreenViewModel = koinInject(),
+    navController: NavHostController
+) {
+    val state = viewModel.newsViewState
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val state = viewModel.newsViewState
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
 
-            when (val resultedState = state.value) {
-                is HomeScreenViewState.Failure -> Failure(resultedState.error)
-                is HomeScreenViewState.Loading -> Loading()
-                is HomeScreenViewState.Success -> {
-                    PhotosList(resultedState.photos, onItemClick = {
-                        navigator.push(DetailScreen(it))
-                    },
-                        onProfileImageClick = {
-                            navigateToWebViewScreen(it, navigator)
-                        })
-                    Spacer(modifier = Modifier.height(72.dp))
-                }
+        when (val resultedState = state.value) {
+            is HomeScreenViewState.Failure -> Failure(resultedState.error)
+            is HomeScreenViewState.Loading -> Loading()
+            is HomeScreenViewState.Success -> {
+                PhotosList(resultedState.photos, onItemClick = {photo ->
+                    navController.currentBackStackEntry?.savedStateHandle?.set("photo", photo)
+                },
+                    onProfileImageClick = {
+                        navigateToWebViewScreen(it, navController)
+                    })
+                Spacer(modifier = Modifier.height(72.dp))
             }
         }
     }
-
-    private fun navigateToWebViewScreen(webUrl: String, navigator: Navigator) {
-        navigator.push(WebViewScreen(webUrl))
-    }
 }
+
+private fun navigateToWebViewScreen(webUrl: String, navigator: NavHostController) {
+    navigator.navigate(Screen.Web.route)
+//    navigator.push(WebViewScreen(webUrl))
+}
+
 
 @Composable
 fun PhotosList(

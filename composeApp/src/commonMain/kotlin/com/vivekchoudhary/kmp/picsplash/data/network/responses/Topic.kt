@@ -18,7 +18,7 @@ data class Topic(
 @Serializable
 data class CoverPhoto(
     @SerialName("id")
-    val id: String,
+    val coverPhotoId: String,
     @SerialName("urls")
     val urls: Urls
 )

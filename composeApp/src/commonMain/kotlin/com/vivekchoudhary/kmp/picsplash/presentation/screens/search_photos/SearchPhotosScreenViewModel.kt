@@ -1,8 +1,7 @@
 package com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos
 
 import androidx.compose.runtime.mutableStateOf
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.ViewModel
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
 import com.vivekchoudhary.kmp.picsplash.domain.usecase.GetAllCollectionsUseCase
 import com.vivekchoudhary.kmp.picsplash.domain.usecase.GetTopicsUseCase
@@ -28,7 +27,7 @@ class SearchPhotosScreenViewModel(
     private val searchPhotosUseCase: SearchPhotosUseCase,
     private val getTopicsUseCase: GetTopicsUseCase,
     private val getAllCollectionsUseCase: GetAllCollectionsUseCase
-) : ScreenModel {
+) : ViewModel() {
 
     private val job = SupervisorJob()
     private val coroutineContext: CoroutineContext = job + Dispatchers.IO
@@ -64,7 +63,7 @@ class SearchPhotosScreenViewModel(
             }
         }.onEach { _isSearching.update { false } }
         .stateIn(
-            screenModelScope,
+            viewModelScope,
             SharingStarted.WhileSubscribed(5000),
             _photos.value
         )

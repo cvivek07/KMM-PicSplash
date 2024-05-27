@@ -8,8 +8,10 @@ import com.vivekchoudhary.kmp.picsplash.data.network.responses.Collection
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Profile
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Topic
-import database.toDomainList
+import database.toCollectionDomainList
 import database.toEntity
+import database.toPhotoDomainList
+import database.toTopicDomainList
 
 class PhotoRepositoryImpl(
     private val apiService: ApiService,
@@ -30,7 +32,7 @@ class PhotoRepositoryImpl(
         return result
     }
 
-    private suspend fun cachedPhotosData() = localDataSource.getAllPhotos().toDomainList()
+    private suspend fun cachedPhotosData() = localDataSource.getAllPhotos().toPhotoDomainList()
 
     private suspend fun apiFetch(result: ArrayList<Photo>) {
         var list: ArrayList<Photo>
@@ -39,7 +41,7 @@ class PhotoRepositoryImpl(
             result.addAll(list)
         }
         result.forEach {
-            localDataSource.insertPhoto(it.toEntity())
+            localDataSource.upsertPhoto(it.toEntity())
         }
     }
 
@@ -50,11 +52,27 @@ class PhotoRepositoryImpl(
     }
 
     override suspend fun getTopics(): List<Topic> {
-        return apiService.getTopics().body()
+        return if(localDataSource.getAllTopics().isEmpty()) {
+            val topics : List<Topic> = apiService.getTopics().body()
+            topics.forEach {
+                localDataSource.upsertTopic(it.toEntity())
+            }
+            localDataSource.getAllTopics().toTopicDomainList()
+        } else {
+            localDataSource.getAllTopics().toTopicDomainList()
+        }
     }
 
     override suspend fun getCollections(): List<Collection> {
-        return apiService.getCollections().body()
+        return if(localDataSource.getAllCollections().isEmpty()) {
+            val collections : List<Collection> = apiService.getCollections().body()
+            collections.forEach {
+                localDataSource.upsertCollection(it.toEntity())
+            }
+            localDataSource.getAllCollections().toCollectionDomainList()
+        } else {
+            localDataSource.getAllCollections().toCollectionDomainList()
+        }
     }
 
     override suspend fun getSavedPhotos(): List<Photo> {

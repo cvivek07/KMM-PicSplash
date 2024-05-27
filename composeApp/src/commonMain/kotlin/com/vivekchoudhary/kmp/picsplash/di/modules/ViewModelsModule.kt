@@ -5,7 +5,7 @@ import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.HomeScreenView
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.profile.ProfileViewModel
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.saved_photos.SavedPhotosScreenViewModel
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos.SearchPhotosScreenViewModel
-import com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos.TopicScreenViewModel
+import com.vivekchoudhary.kmp.picsplash.presentation.screens.topics.TopicScreenViewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {

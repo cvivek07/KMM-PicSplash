@@ -58,12 +58,6 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.transitions)
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.koin)
-            implementation(libs.voyager.bottomSheetNavigator)
-            implementation(libs.voyager.tabNavigator)
             implementation(libs.image.loader)
             implementation(libs.kermit)
             implementation(libs.coil.compose)
@@ -73,6 +67,16 @@ kotlin {
             //Room
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            //common viewmodel
+            implementation(libs.lifecycle.viewmodel.compose)
+
+            //navigation
+            implementation(libs.androidx.navigation.compose)
+
+            // animation
+            implementation(libs.androidx.core.animation)
+
         }
 
         iosMain.dependencies {
@@ -124,6 +128,7 @@ room {
 
 dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
 
     // Room
     add("kspCommonMainMetadata", libs.room.compiler)

@@ -12,5 +12,6 @@ fun getAppDatabase(): AppDatabase {
         name = dbFile,
         factory = { AppDatabase::class.instantiateImpl() }
     ).setDriver(BundledSQLiteDriver())
+        .fallbackToDestructiveMigration(true)
         .build()
 }

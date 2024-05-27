@@ -6,41 +6,47 @@ android-minSdk = "24"
 android-targetSdk = "34"
 
 
-androidx-activityCompose = "1.8.2"
+androidx-activityCompose = "1.9.0"
 androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
-androidx-core-ktx = "1.12.0"
+androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.5.1"
-androidx-material = "1.10.0"
+androidx-material = "1.12.0"
 androidx-test-junit = "1.1.5"
-compose = "1.6.7"
+compose = "1.6.10"
+composeUiTooling = "1.6.7"
 compose-plugin = "1.6.10"
-navigation-compose = "2.7.6"
+lifecycleViewmodelCompose = "2.8.0"
+navigation-compose = "2.7.0-alpha07"
 compose-compiler = "1.5.6"
 junit = "4.13.2"
-navigationRuntimeKtx = "2.7.6"
-kotlinx-coroutines = "1.7.3"
+navigationRuntimeKtx = "2.7.7"
+kotlinx-coroutines = "1.8.1-Beta"
 insetsx = "0.1.0-alpha07"
-ktor = "2.3.5"
-kotlinx-serialization = "1.5.1"
-koin = "3.5.0"
+ktor = "2.3.11"
+kotlinx-serialization = "1.6.3"
+koin = "3.5.4"
 koinCompose = "1.0.4"
 sqlDelight = "2.0.0-alpha05"
 uiUtil = "1.6.10"
-voyager = "1.0.0-rc10"
+voyager = "1.0.0"
 image-loader-version = "1.5.3"
 kermit = "1.0.0"
 coil-compose = "3.0.0-alpha06"
-runtime-compose = "2.6.2"
+runtime-compose = "2.8.0"
 kotlin = "2.0.0"
 room = "2.7.0-alpha02"
 ksp = "2.0.0-1.0.21"
 sqlite = "2.5.0-SNAPSHOT"
+lifecycleViewmodelAndroid = "2.8.0"
+androidx-navigation = "2.7.0-alpha06"
+coreAnimation = "1.0.0"
 
 [libraries]
 androidGradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 composeGradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
 kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 roomGradlePlugin = { module = "androidx.room:room-gradle-plugin", version.ref = "room" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,11 +61,13 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeUiTooling" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composeUiTooling" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "composeUiTooling" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -81,15 +89,12 @@ lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-com
 image-loader = {module= "io.github.qdsfdhvh:image-loader", version.ref = "image-loader-version"}
 
 ui-util = { module = "org.jetbrains.compose.ui:ui-util", version.ref = "uiUtil" }
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
-voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
-voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
-voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 sqlite-bundled = { module= "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+androidx-core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
 
 
 

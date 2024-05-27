@@ -12,26 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import androidx.navigation.NavController
 
-class WebViewScreen(private val url: String) : Screen {
-    @Composable
-    override fun Content() {
-        val navigator: Navigator = LocalNavigator.currentOrThrow
-        Column(modifier = Modifier.fillMaxSize()) {
+@Composable
+fun WebViewScreen(url: String, navController: NavController) {
+    Column(modifier = Modifier.fillMaxSize()) {
 
-            Icon(
-                imageVector = Icons.Rounded.ArrowBack,
-                tint = Color.DarkGray,
-                contentDescription = null,
-                modifier = Modifier.clickable {
-                    navigator.pop()
-                }.padding(20.dp)
-            )
-            WebView(modifier = Modifier.fillMaxSize(), url)
-        }
+        Icon(
+            imageVector = Icons.Rounded.ArrowBack,
+            tint = Color.DarkGray,
+            contentDescription = null,
+            modifier = Modifier.clickable {
+                navController.popBackStack()
+            }.padding(20.dp)
+        )
+        WebView(modifier = Modifier.fillMaxSize(), url)
     }
 }

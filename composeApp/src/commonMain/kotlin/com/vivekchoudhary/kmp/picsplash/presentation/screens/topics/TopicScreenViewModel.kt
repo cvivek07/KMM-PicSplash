@@ -1,9 +1,8 @@
-package com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos
+package com.vivekchoudhary.kmp.picsplash.presentation.screens.topics
 
 import androidx.compose.runtime.mutableStateOf
-import cafe.adriel.voyager.core.model.ScreenModel
+import androidx.lifecycle.ViewModel
 import com.vivekchoudhary.kmp.picsplash.domain.usecase.GetTopicByIdUseCase
-import com.vivekchoudhary.kmp.picsplash.presentation.screens.topics.TopicScreenViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -13,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 
 class TopicScreenViewModel(
     private val getTopicByIdUseCase: GetTopicByIdUseCase
-) : ScreenModel {
+) : ViewModel() {
 
     private val job = SupervisorJob()
     private val coroutineContext: CoroutineContext = job + Dispatchers.IO

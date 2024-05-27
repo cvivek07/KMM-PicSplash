@@ -1,7 +1,7 @@
 package com.vivekchoudhary.kmp.picsplash.presentation.screens.saved_photos
 
 import androidx.compose.runtime.mutableStateOf
-import cafe.adriel.voyager.core.model.ScreenModel
+import androidx.lifecycle.ViewModel
 import com.vivekchoudhary.kmp.picsplash.domain.usecase.GetSavedPhotosUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 
 class SavedPhotosScreenViewModel(
     private val getSavedPhotosUseCase: GetSavedPhotosUseCase
-) : ScreenModel {
+) : ViewModel() {
 
     private val job = SupervisorJob()
     private val coroutineContext: CoroutineContext = job + Dispatchers.IO
