@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +41,9 @@ import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.Screen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos.maxHeight
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.web_view.WebViewScreen
+import kmm_picsplash.composeapp.generated.resources.Res
+import kmm_picsplash.composeapp.generated.resources.Roboto_Black
+import org.jetbrains.compose.resources.Font
 import org.koin.compose.koinInject
 
 @Composable
@@ -124,7 +128,7 @@ fun PhotosList(
                         text = photo.user.name,
                         maxLines = 2,
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(Res.font.Roboto_Black)),
                         modifier = Modifier.weight(1f, fill = false).clickable {
                             onProfileImageClick(photo.user.links.profileLink)
                         }

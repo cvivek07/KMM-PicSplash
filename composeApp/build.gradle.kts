@@ -77,6 +77,8 @@ kotlin {
             // animation
             implementation(libs.androidx.core.animation)
 
+            // required by koin
+            implementation("co.touchlab:stately-common:2.0.5")
         }
 
         iosMain.dependencies {
