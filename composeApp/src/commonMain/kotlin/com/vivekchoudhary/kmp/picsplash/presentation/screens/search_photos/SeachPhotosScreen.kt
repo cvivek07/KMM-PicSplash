@@ -53,6 +53,8 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Collection
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Topic
+import com.vivekchoudhary.kmp.picsplash.presentation.NavigationUtil
+import com.vivekchoudhary.kmp.picsplash.presentation.screens.Screen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.Loading
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.PhotosList
 import kotlinx.coroutines.delay
@@ -80,7 +82,8 @@ fun SearchPhotosScreen(viewModel: SearchPhotosScreenViewModel = koinInject(),
                     if (photos.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(72.dp))
                         PhotosList(photos = photos, onItemClick = {
-//                            navigator.push(DetailScreen(it))
+                            NavigationUtil.photo = it
+                            navController.navigate(Screen.Detail.route)
                         },
                             onProfileImageClick = {
 //                                navigateToWebViewScreen(it, navigator)
@@ -89,7 +92,8 @@ fun SearchPhotosScreen(viewModel: SearchPhotosScreenViewModel = koinInject(),
                     } else {
                         CollectionsList(viewState.collections.take(5))
                         PopularTopics(viewState.topics, onTopicClicked = {
-//                            navigator.push(TopicScreen(it))
+                            NavigationUtil.topic = it
+                            navController.navigate(Screen.Topic.route)
                         })
                         Spacer(modifier = Modifier.height(72.dp))
                     }

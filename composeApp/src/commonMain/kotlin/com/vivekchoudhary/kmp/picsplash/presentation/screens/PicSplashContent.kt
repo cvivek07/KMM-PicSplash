@@ -24,21 +24,29 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import co.touchlab.kermit.Logger
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
+import com.vivekchoudhary.kmp.picsplash.presentation.NavigationUtil
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.detail.DetailScreen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.home.HomeScreen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.profile.ProfileScreen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.saved_photos.SavedPhotosScreen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos.SearchPhotosScreen
+import com.vivekchoudhary.kmp.picsplash.presentation.screens.topics.TopicScreen
 import kmm_picsplash.composeapp.generated.resources.Res
 import kmm_picsplash.composeapp.generated.resources.favorite_icon
 import kmm_picsplash.composeapp.generated.resources.home_icon
 import kmm_picsplash.composeapp.generated.resources.profile_icon
 import kmm_picsplash.composeapp.generated.resources.search_icon
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -49,7 +57,8 @@ fun MainContent() {
         Screen.Home.route, Screen.Search.route, Screen.SavedPhotos.route, Screen.Profile.route
     )
     Scaffold(bottomBar = {
-        BottomNavigation(modifier =  Modifier.height(60.dp), backgroundColor = Color.White) {
+        BottomNavigation(modifier =  Modifier.height(60.dp), backgroundColor = Color.White,
+            ) {
             Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxSize()) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -96,14 +105,19 @@ fun MainContent() {
             composable(route = Screen.Profile.route) {
                 ProfileScreen(navController = navController)
             }
-            composable(route = Screen.Detail.route,
-            ) {
-                val photo: Photo = navController.previousBackStackEntry?.savedStateHandle?.get("photo")!!
-                DetailScreen(photo = photo, navController = navController)
+            composable(route = Screen.Detail.route) {
+                DetailScreen(photo = NavigationUtil.photo, navController = navController)
+            }
+
+            composable(route = Screen.Topic.route) {
+                TopicScreen(topic = NavigationUtil.topic, navController = navController)
             }
         }
     }
 }
+
+@Serializable
+object PersonList
 
 @Composable
 fun getIconForScreen(screen: String): DrawableResource {

@@ -33,16 +33,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.room.TypeConverter
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.vivekchoudhary.kmp.picsplash.data.network.responses.Photo
+import com.vivekchoudhary.kmp.picsplash.data.network.responses.ProfileImage
+import com.vivekchoudhary.kmp.picsplash.presentation.NavigationUtil
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.Screen
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.search_photos.maxHeight
 import com.vivekchoudhary.kmp.picsplash.presentation.screens.web_view.WebViewScreen
+import io.ktor.utils.io.charsets.Charsets
 import kmm_picsplash.composeapp.generated.resources.Res
 import kmm_picsplash.composeapp.generated.resources.Roboto_Black
+import kmm_picsplash.composeapp.generated.resources.Roboto_Regular
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.Font
 import org.koin.compose.koinInject
 
@@ -61,8 +68,9 @@ fun HomeScreen(
             is HomeScreenViewState.Failure -> Failure(resultedState.error)
             is HomeScreenViewState.Loading -> Loading()
             is HomeScreenViewState.Success -> {
-                PhotosList(resultedState.photos, onItemClick = {photo ->
-                    navController.currentBackStackEntry?.savedStateHandle?.set("photo", photo)
+                PhotosList(resultedState.photos, onItemClick = { photo ->
+                    navController.navigate(Screen.Detail.route)
+                    NavigationUtil.photo = photo
                 },
                     onProfileImageClick = {
                         navigateToWebViewScreen(it, navController)
@@ -128,7 +136,7 @@ fun PhotosList(
                         text = photo.user.name,
                         maxLines = 2,
                         fontSize = 12.sp,
-                        fontFamily = FontFamily(Font(Res.font.Roboto_Black)),
+                        fontFamily = FontFamily(Font(Res.font.Roboto_Regular)),
                         modifier = Modifier.weight(1f, fill = false).clickable {
                             onProfileImageClick(photo.user.links.profileLink)
                         }

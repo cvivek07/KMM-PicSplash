@@ -19,11 +19,12 @@ sealed class Screen(val route: String) {
     data object Splash : Screen("splash")
     data object Main : Screen("main")
     data object Home : Screen("home")
-    data object Detail : Screen("detail")
+    data object Detail : Screen("detail/{imageUrl}")
     data object Search : Screen("search")
     data object SavedPhotos : Screen("savedphotos")
     data object Profile : Screen("profile")
     data object Web : Screen("webview")
+    data object Topic : Screen("topic")
 }
 
 @Composable
